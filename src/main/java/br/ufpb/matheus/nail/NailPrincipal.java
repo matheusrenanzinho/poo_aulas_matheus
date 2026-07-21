@@ -1,13 +1,12 @@
 package br.ufpb.matheus.nail;
 
-import java.util.Scanner;
+import javax.swing.SwingUtilities;
 
 public class NailPrincipal {
-    public static void main(String [] args) {
-        Scanner sc = new Scanner(System.in);
-        NailSistema sistema = new NailSistema();
-        double redimentoPorDia;
-
-        sc.close();
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JanelaPrincipal janela = new JanelaPrincipal();
+            janela.setVisible(true);
+        });
     }
 }

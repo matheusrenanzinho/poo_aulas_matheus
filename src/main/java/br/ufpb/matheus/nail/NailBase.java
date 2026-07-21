@@ -1,8 +1,9 @@
 package br.ufpb.matheus.nail;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class NailBase {
+public class NailBase implements Serializable {
     private String cliente;
     private String servico;
     private String horario;
@@ -17,10 +18,10 @@ public class NailBase {
         this.estabelecimentoLocal = estabelecimento;
     }
 
-    // Iniciar Sem Nada
-    public NailBase() {this("", "", "", 0.0, "Nenhum Estabelecimento!");}
+    public NailBase() {
+        this("", "", "", 0.0, "Nenhum Estabelecimento!");
+    }
 
-    // Parte do Cliente
     public String getCliente() {
         return this.cliente;
     }
@@ -29,7 +30,6 @@ public class NailBase {
         this.cliente = novoCliente;
     }
 
-    // Parte do Serviço
     public String getServico() {
         return this.servico;
     }
@@ -38,7 +38,6 @@ public class NailBase {
         this.servico = novoServico;
     }
 
-    // Parte do Horario
     public String getHorario() {
         return this.horario;
     }
@@ -47,7 +46,6 @@ public class NailBase {
         this.horario = novoHorario;
     }
 
-    // Parte do Preço
     public double getPreco() {
         return this.precoAtendimento;
     }
@@ -56,7 +54,6 @@ public class NailBase {
         this.precoAtendimento = novoPreco;
     }
 
-    // Parte do Estabelecimento
     public String getEstabelecimento() {
         return this.estabelecimentoLocal;
     }
@@ -67,14 +64,18 @@ public class NailBase {
 
     @Override
     public String toString() {
-        return "Cliente: " + cliente + " selecionou o atendimento: " + servico + " (R$ " + precoAtendimento + "), marcado para o Horario: " + horario + " horas!";
+        return "Cliente: " + cliente + " | Serviço: " + servico + " (R$ " + precoAtendimento + ") | Horário: " + horario + "h | Local: " + estabelecimentoLocal;
     }
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        NailBase that = (NailBase) o;
-        return Double.compare(precoAtendimento, that.precoAtendimento) == 0 && Objects.equals(cliente, that.cliente) && Objects.equals(servico, that.servico) && Objects.equals(horario, that.horario);
+        NailBase nailBase = (NailBase) o;
+        return Double.compare(nailBase.precoAtendimento, precoAtendimento) == 0 &&
+                Objects.equals(cliente, nailBase.cliente) &&
+                Objects.equals(servico, nailBase.servico) &&
+                Objects.equals(horario, nailBase.horario);
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AmigoScretoMap {
-    private final Map<String, Amigao> amigos;
+    private final Map<String, Amiguinho> amigos;
     private final List<Mensagem> mensagens;
 
     public AmigoScretoMap() {
@@ -18,7 +18,7 @@ public class AmigoScretoMap {
         if (this.amigos.containsKey(emailAmigo)) {
             throw new AmigoJaExisteException("Já existe um amigo cadastrado com o e-mail: " + emailAmigo);
         }
-        Amigao novoAmigo = new Amigao();o(nomeAmigo, emailAmigo);
+        Amiguinho novoAmigo = new Amiguinho();o(nomeAmigo, emailAmigo);
         this.amigos.put(emailAmigo, novoAmigo);
     }
 
@@ -27,7 +27,7 @@ public class AmigoScretoMap {
     }
 
     public Amiguinho pesquisaAmigo(String emailAmigo) throws AmigoInexistenteException {
-        Amigao amigo = this.amigos.get(emailAmigo);
+        Amiguinho amigo = this.amigos.get(emailAmigo);
         if (amigo == null) {
             throw new AmigoInexistenteException("Amigo não encontrado com o e-mail: " + emailAmigo);
         }
@@ -35,13 +35,13 @@ public class AmigoScretoMap {
     }
 
     public void configAmigoSecretoDe(String emailDaPessoa, String emailAmigoSorteado) throws AmigoInexistenteException {
-        Amigao pessoa = pesquisaAmigo(emailDaPessoa);
+        Amiguinho pessoa = pesquisaAmigo(emailDaPessoa);
         pesquisaAmigo(emailAmigoSorteado);
         pessoa.setEmailAmigoSorteado(emailAmigoSorteado);
     }
 
     public String pesquisaAmigoSecretoDe(String emailDaPessoa) throws AmigoInexistenteException, AmigoNaoSorteadoException {
-        Amigao pessoa = pesquisaAmigo(emailDaPessoa);
+        Amiguinho pessoa = pesquisaAmigo(emailDaPessoa);
         String sorteado = pessoa.getEmailAmigoSorteado();
         if (sorteado == null || sorteado.trim().isEmpty()) {
             throw new AmigoNaoSorteadoException("O amigo secreto de " + emailDaPessoa + " ainda não foi sorteado.");
